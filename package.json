@@ -9,12 +9,11 @@
   },
   "dependencies": {
     "body-parser": "^1.18.3",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "moment": "^2.24.0"
   },
   "devDependencies": {
-    "babel-eslint": "^10.0.1",
     "concurrently": "^4.0.1",
-    "eslint": "5.3.0",
     "eslint-config-airbnb": "17.1.0",
     "eslint-config-react-app": "^3.0.6",
     "eslint-plugin-flowtype": "^3.2.1",

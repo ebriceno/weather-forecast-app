@@ -8,7 +8,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #282C34;
   min-height: 50%;
   display: flex;
   flex-direction: column;
@@ -22,6 +22,97 @@
 .App-link {
   color: #61dafb;
 }
+
+/* WIDGET  WEEK */
+
+.week-widget-container {
+  background: #E5EBF2;
+  display: flex;
+}
+
+.week-widget-container > .week-widget-item {
+  background: #FFFFFF;
+  height: 280px;
+  margin: 10px 5px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  flex-grow: 1;
+  flex-basis: 0;
+  padding: 0.5em;
+}
+
+.week-widget-item > .date > .weekday {
+  color: #59B7C2;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.week-widget-item > .date > .weekdate {
+  color: #2A2A2A;
+  font-size: 0.9em;
+}
+
+.week-widget-item > .main-icon {
+  color: #2A2A2A;
+  font-weight: bold;
+  font-size: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+.week-widget-item > .extra-info > .temp {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.week-widget-item > .extra-info > .temp > .min {
+  font-size: 1.1em;
+  color: #A8DADE;
+  display: flex;
+  align-self: center;
+  align-items: flex-start;
+}
+
+.week-widget-item > .extra-info > .temp > .max {
+  font-size: 1.5em;
+  color: #59B7C2;
+  display: flex;
+  align-self: center;
+  align-items: flex-start;
+}
+
+.week-widget-item > .extra-info > .humidity > .hum {
+  font-size: 1.5em;
+  color: #59B7C2;
+  display: flex;
+}
+
+.week-widget-item > .extra-info {
+  display: flex;
+  margin: 10px 0;
+  padding: 0.2em;
+}
+
+/* WIDGET DAY */
+
+.day-widget-container {
+  background: red;
+  display: flex;
+}
+
+.day-widget-container > .day-widget-item {
+  background: green;
+  height: 100px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-basis: 0;
+}
+
+/* WIDGET END */
 
 @keyframes App-logo-spin {
   from {
