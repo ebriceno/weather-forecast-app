@@ -4,7 +4,6 @@ import './styles/App.css';
 import CurrentForecast from './components/CurrentForecast';
 import DayForecast from './components/DayForecast';
 import WeekForecast from './components/WeekForecast';
-import cityData from './utils/mock';
 
 class App extends Component {
   constructor(props) {
@@ -12,7 +11,7 @@ class App extends Component {
     this.props = props;
 
     this.state = {
-      response: '',
+      forecastData: '',
       post: '',
       responseToPost: '',
       cityName: '',
@@ -29,20 +28,20 @@ class App extends Component {
 
   componentDidMount() {
     this.callApi()
-      .then(res => this.setState({ response: res.express }))
+      .then(res => this.setState({ forecastData: res }))
       .catch(err => console.log(err));
   }
 
   callApi = async () => {
-    const response = await fetch('/api/hello');
+    const response = await fetch('/forecast');
     const body = await response.json();
     if (response.status !== 200) throw Error(body.message);
     return body;
   };
 
   onSearch(value) {
-    const cityd = cityData.filter(
-      cityData => cityData.city.name.toLowerCase() === value.toLowerCase()
+    const cityd = this.state.forecastData.filter(
+      item => item.name.toLowerCase() === value.toLowerCase()
     );
 
     this.setState({
@@ -57,7 +56,7 @@ class App extends Component {
     });
   }
 
-  handleSubmit = async e => {
+  /* handleSubmit = async e => {
     e.preventDefault();
     const response = await fetch('/api/world', {
       method: 'POST',
@@ -68,7 +67,7 @@ class App extends Component {
     });
     const body = await response.text();
     this.setState({ responseToPost: body });
-  };
+  }; */
 
   render() {
     const Search = Input.Search;
@@ -113,8 +112,8 @@ class App extends Component {
           (
             <div>
               <CurrentForecast
-                cityName={rawCityData.city.name}
-                countryCode={rawCityData.city.country}
+                cityName={rawCityData.name}
+                countryCode={rawCityData.country}
                 currentWeather={rawCityData.list[0]}
               />
               <WeekForecast
