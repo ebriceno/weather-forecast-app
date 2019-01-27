@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const Forecast = require('./api/models/apiModel');
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/Forecastdb');
+mongoose.connect('mongodb://heroku_24fzlm7k:s23et5m2j414a8t2pos9enu00k@ds213755.mlab.com:13755/heroku_24fzlm7k');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
