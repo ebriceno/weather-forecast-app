@@ -18,14 +18,14 @@ const WeekForecast = (props) => {
         <div className={'weekday'}>{moment(info.dt_txt).format('dddd')}</div>
         <div className={'weekdate'}>{moment(info.dt_txt).format("MMM Do")}</div>
       </div>
-      <div className={'main-icon'}>
+      <div className={'main-icon'} title={info.weather[0].description}>
         <span>{forecastIcons[info.weather[0].description]}</span>
       </div>
       <div className={'extra-info'}>
         <div className={'temp'}>
           <span>{'Temp.'}</span>
-          <div className={'max'}>{`${Math.round(info.main.temp_max)}`}<WiCelsius size={32}/></div>
-          <div className={'min'}>{`Low ${Math.round(info.main.temp_min)}`}<WiCelsius size={16}/></div>
+          <div className={'max'}>{`${Math.round(info.main.temp_max)}`}<WiCelsius size={36}/></div>
+          <div className={'min'}>{`Low ${Math.round(info.main.temp_min)}`}<WiCelsius size={22}/></div>
         </div>
         <div className={'humidity'}>
           <span>{'Humidity'}</span>
@@ -36,9 +36,12 @@ const WeekForecast = (props) => {
   ));
 
   return (
-    <div className={'week-widget-container'}>
-      {weatherListWidget}
-    </div>
+    <>
+      <h3 className={'weekly-title'}>{`${weatherListWidget.length} day weather forecast`}</h3>
+      <div className={'week-widget-container'}>
+        {weatherListWidget}
+      </div>
+    </>
   );
 };
 

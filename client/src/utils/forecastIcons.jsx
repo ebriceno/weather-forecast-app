@@ -9,8 +9,8 @@ export const forecastIcons = Object.freeze({
 });
 
 export const forecastIconsSmall = Object.freeze({
-  'few clouds': <WiCloud size={64} color='#000'/>,
-  'scattered clouds': <WiCloudy size={64} color='#000'/>,
-  'light rain': <WiRainMix size={64} color='#000'/>,
-  'clear sky': <WiDaySunny size={64} color='#000'/>,
+  'few clouds': <WiCloud size={68} color='#D5E4F1'/>,
+  'scattered clouds': <WiCloudy size={68} color='#D5E4F1'/>,
+  'light rain': <WiRainMix size={68} color='#D5E4F1'/>,
+  'clear sky': <WiDaySunny size={68} color='#D5E4F1'/>,
 });

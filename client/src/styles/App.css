@@ -2,13 +2,8 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-}
-
 .App-header {
-  background-color: #282C34;
+  background-color: #A8DADE;
   min-height: 50%;
   display: flex;
   flex-direction: column;
@@ -16,11 +11,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  padding-bottom: 10px;
-}
-
-.App-link {
-  color: #61dafb;
+  padding: 10px 0;
 }
 
 /* WIDGET  WEEK */
@@ -32,7 +23,7 @@
 
 .week-widget-container > .week-widget-item {
   background: #FFFFFF;
-  height: 280px;
+  height: 250px;
   margin: 10px 5px;
   display: flex;
   flex-direction: column;
@@ -61,10 +52,12 @@
   flex-direction: column;
 }
 
-.week-widget-item > .extra-info > .temp {
+.week-widget-item > .extra-info > .temp,
+.week-widget-item > .extra-info > .humidity {
   display: flex;
   flex-direction: column;
   width: 50%;
+  align-items: center;
 }
 
 .week-widget-item > .extra-info > .temp > .min {
@@ -98,27 +91,60 @@
 /* WIDGET DAY */
 
 .day-widget-container {
-  background: red;
+  background: #A8DADE;
   display: flex;
 }
 
 .day-widget-container > .day-widget-item {
-  background: green;
-  height: 100px;
+  background: #FFFFFF;
+  height: 80px;
   margin: 10px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   flex-basis: 0;
+  padding: 0.5em;
 }
 
-/* WIDGET END */
+.day-widget-item > .temp {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  font-size: 1.1em;
+  color: #59B7C2;
+}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.day-widget-item > .date {
+  font-size: 0.9em;
+}
+
+.day-widget-item > .main-icon {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  margin: 0.5em 0;
+}
+
+
+/* CURRENT WIDGET */
+
+.current-widget {
+  display: flex;
+  flex-direction: column;
+  margin: 5px 0;
+}
+
+.current-widget > .current-widget-info {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  align-self: center;
+}
+
+.current-widget > .current-widget-info > .temp {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  font-size: 5em;
+  color: #59B7C2;
 }

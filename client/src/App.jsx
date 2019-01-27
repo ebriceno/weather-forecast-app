@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Input } from 'antd';
-import logo from './assets/logo.svg';
 import './styles/App.css';
 import CurrentForecast from './components/CurrentForecast';
 import DayForecast from './components/DayForecast';
@@ -42,8 +41,9 @@ class App extends Component {
   };
 
   onSearch(value) {
-    const cityd = cityData.filter(cityData => cityData.city.name === value);
-    console.log(cityd);
+    const cityd = cityData.filter(
+      cityData => cityData.city.name.toLowerCase() === value.toLowerCase()
+    );
 
     this.setState({
       cityName: value,
@@ -88,21 +88,14 @@ class App extends Component {
 
     return (
       <div className="App">
-        { /* <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+        <header className="App-header">
+          <Search
+            placeholder="Enter city name"
+            onSearch={value => this.onSearch(value)}
+            style={{ width: 200 }}
+          />
         </header>
-        <p>{this.state.response}</p>
+        { /* <p>{this.state.response}</p>
         <form onSubmit={this.handleSubmit}>
           <p>
             <strong>Post to Server:</strong>
@@ -114,13 +107,7 @@ class App extends Component {
           />
           <button type="submit">Submit</button>
         </form>
-        <p>{this.state.responseToPost}</p> */}
-
-        <Search
-          placeholder="Enter city name"
-          onSearch={value => this.onSearch(value)}
-          style={{ width: 200 }}
-        />
+        <p>{this.state.responseToPost}</p> */ }
 
         { cityData.length > 0 ?
           (

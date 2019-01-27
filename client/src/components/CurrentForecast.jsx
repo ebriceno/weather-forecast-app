@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { WiCelsius, WiHumidity } from 'weather-icons-react';
+import { forecastIcons } from '../utils/forecastIcons';
 
 const CurrentForecast = (props) => {
   const {
@@ -13,15 +15,12 @@ const CurrentForecast = (props) => {
     humidity,
   } = currentWeather.main;
 
-  const sky = currentWeather.weather[0].description;
-
   const details = (
-    <div>
-      <h2>{`Weather in ${cityName}, ${countryCode}`}</h2>
-      <h3>{sky}</h3>
-      <div>
-        <p>{`Temperature: ${Math.round(temp)}`}</p>
-        <p>{`Humidity: ${humidity}`}</p>
+    <div className={'current-widget'}>
+      <h2>{`Current weather in ${cityName}, ${countryCode}`}</h2>
+      <div className={'current-widget-info'}>
+        <div>{forecastIcons[currentWeather.weather[0].description]}</div>
+        <div className={'temp'}><span>{`${Math.round(temp)}`}</span><WiCelsius size={36}/></div>
       </div>
     </div>
   );
