@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AutoComplete } from 'antd';
+import { AutoComplete, Spin } from 'antd';
 import './styles/App.css';
 import CurrentForecast from './components/CurrentForecast';
 import DayForecast from './components/DayForecast';
@@ -19,21 +19,35 @@ class App extends Component {
       weekWeatherList: [],
       dailyWeatherList: [],
       selectedDay: '',
+      loading: true,
     };
 
     this.handleSelect = this.handleSelect.bind(this);
     this.onDaySelect = this.onDaySelect.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.makeRequest = this.makeRequest.bind(this);
   }
 
   componentDidMount() {
-    this.callApi()
-    .then(res => this.setState({
-      forecastData: res,
-      cities: res.map(city => `${city.name} (${city.country})`),
-    }))
-    .catch(err => console.log(err));
+    this.makeRequest();
+
+    this.interval = setInterval(() =>
+      this.makeRequest(), 60000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   };
+
+  makeRequest() {
+    this.callApi()
+      .then(res => this.setState({
+        loading: false,
+        forecastData: res,
+        cities: res.map(city => `${city.name} (${city.country})`),
+      },))
+      .catch(err => console.log(err));
+  }
 
   callApi = async () => {
     const response = await fetch('/forecast');
@@ -66,21 +80,19 @@ class App extends Component {
     });
   }
 
-  /* handleSubmit = async e => {
-    e.preventDefault();
-    const response = await fetch('/api/world', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ post: this.state.post }),
-    });
-    const body = await response.text();
-    this.setState({ responseToPost: body });
-  }; */
-
   render() {
-    const { cityData, selectedDay } = this.state;
+    const { cityData, selectedDay, loading } = this.state;
+
+    if (loading) {
+      return (
+        <div className="App">
+          <header className="App-header">
+            <Spin />
+          </header>
+        </div>
+      );
+    }
+
     let rawCityData;
     let weeklyWeather;
     let dailyWeather;
@@ -104,6 +116,7 @@ class App extends Component {
             onSearch={value => this.handleSearch(value)}
             placeholder="Enter city name"
           />
+          <span className={'city-count'}>{`Count: ${this.state.cities.length}`}</span>
         </header>
         { cityData.length > 0 ?
           (
