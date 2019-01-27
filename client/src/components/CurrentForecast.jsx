@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { WiCelsius, WiHumidity } from 'weather-icons-react';
+import { WiCelsius } from 'weather-icons-react';
 import { forecastIcons } from '../utils/forecastIcons';
 
 const CurrentForecast = (props) => {
@@ -12,7 +12,6 @@ const CurrentForecast = (props) => {
 
   const {
     temp,
-    humidity,
   } = currentWeather.main;
 
   const details = (
