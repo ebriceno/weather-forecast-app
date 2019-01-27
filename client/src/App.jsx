@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input } from 'antd';
+import { AutoComplete } from 'antd';
 import './styles/App.css';
 import CurrentForecast from './components/CurrentForecast';
 import DayForecast from './components/DayForecast';
@@ -12,8 +12,8 @@ class App extends Component {
 
     this.state = {
       forecastData: '',
-      post: '',
-      responseToPost: '',
+      cities: [],
+      filteredCities: [],
       cityName: '',
       cityData: [],
       weekWeatherList: [],
@@ -21,16 +21,19 @@ class App extends Component {
       selectedDay: '',
     };
 
-    this.onSearch = this.onSearch.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
     this.onDaySelect = this.onDaySelect.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
-
 
   componentDidMount() {
     this.callApi()
-      .then(res => this.setState({ forecastData: res }))
-      .catch(err => console.log(err));
-  }
+    .then(res => this.setState({
+      forecastData: res,
+      cities: res.map(city => `${city.name} (${city.country})`),
+    }))
+    .catch(err => console.log(err));
+  };
 
   callApi = async () => {
     const response = await fetch('/forecast');
@@ -39,9 +42,9 @@ class App extends Component {
     return body;
   };
 
-  onSearch(value) {
+  handleSelect(value) {
     const cityd = this.state.forecastData.filter(
-      item => item.name.toLowerCase() === value.toLowerCase()
+      item => item.name.toLowerCase() === value.split(' (')[0].toLowerCase()
     );
 
     this.setState({
@@ -53,6 +56,13 @@ class App extends Component {
   onDaySelect(val) {
     this.setState({
       selectedDay: val,
+    });
+  }
+
+  handleSearch(value) {
+    const { cities: currentCities } = this.state;
+    this.setState({
+      filteredCities: currentCities.filter(item => item.includes(value))
     });
   }
 
@@ -70,7 +80,6 @@ class App extends Component {
   }; */
 
   render() {
-    const Search = Input.Search;
     const { cityData, selectedDay } = this.state;
     let rawCityData;
     let weeklyWeather;
@@ -81,33 +90,21 @@ class App extends Component {
       weeklyWeather = rawCityData.list.filter(item => item.dt_txt.includes('00:00:00'));
 
       if(selectedDay !== '') {
-        dailyWeather = rawCityData.list.filter(item => item.dt_txt.includes(selectedDay));
+        dailyWeather = rawCityData.list.filter(item => item.dt_txt.includes(selectedDay.split('T')[0]));
       }
     }
 
     return (
       <div className="App">
         <header className="App-header">
-          <Search
-            placeholder="Enter city name"
-            onSearch={value => this.onSearch(value)}
+          <AutoComplete
+            dataSource={this.state.filteredCities || this.state.cities}
             style={{ width: 200 }}
+            onSelect={value => this.handleSelect(value)}
+            onSearch={value => this.handleSearch(value)}
+            placeholder="Enter city name"
           />
         </header>
-        { /* <p>{this.state.response}</p>
-        <form onSubmit={this.handleSubmit}>
-          <p>
-            <strong>Post to Server:</strong>
-          </p>
-          <input
-            type="text"
-            value={this.state.post}
-            onChange={e => this.setState({ post: e.target.value })}
-          />
-          <button type="submit">Submit</button>
-        </form>
-        <p>{this.state.responseToPost}</p> */ }
-
         { cityData.length > 0 ?
           (
             <div>
@@ -123,7 +120,6 @@ class App extends Component {
             </div>
           ) : null
         }
-
         { selectedDay !== '' ? <DayForecast weatherDayList={dailyWeather}/> : null}
       </div>
     );

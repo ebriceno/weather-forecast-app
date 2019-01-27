@@ -10,8 +10,6 @@ const WeekForecast = (props) => {
     onDaySelect,
   } = props;
 
-  console.log('WL', weatherList);
-
   const weatherListWidget = weatherList.map(info => (
     <div className={'week-widget-item'} key={info.dt} onClick={() => onDaySelect(info.dt_txt.split(' ')[0])}>
       <div className={'date'}>
