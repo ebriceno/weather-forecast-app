@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import moment from 'moment';
 import { WiCelsius } from 'weather-icons-react';
-import { forecastIcons } from '../utils/forecastIcons';
 import { forecastIconsSmall } from '../utils/forecastIcons.jsx';
 
 const DayForecast = (props) => {
