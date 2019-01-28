@@ -17,7 +17,7 @@ const WeekForecast = (props) => {
         <div className={'weekdate'}>{moment(info.dt_txt).format("MMM Do")}</div>
       </div>
       <div className={'main-icon'} title={info.weather[0].description}>
-        <span>{forecastIcons[info.weather[0].description]}</span>
+        <span>{forecastIcons[info.weather[0].description] || forecastIcons['default']}</span>
       </div>
       <div className={'extra-info'}>
         <div className={'temp'}>

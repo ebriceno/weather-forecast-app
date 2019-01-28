@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import moment from 'moment';
 import { WiCelsius } from 'weather-icons-react';
+import { forecastIcons } from '../utils/forecastIcons';
 import { forecastIconsSmall } from '../utils/forecastIcons.jsx';
 
 const DayForecast = (props) => {
@@ -15,7 +16,7 @@ const DayForecast = (props) => {
         <div>{moment(info.dt_txt).format('LT')}</div>
       </div>
       <div className={'main-icon'}>
-        {forecastIconsSmall[info.weather[0].description]}
+        {forecastIconsSmall[info.weather[0].description] || forecastIconsSmall['default']}
       </div>
       <div className={'temp'}>
         <div className={'temp'}>{`${Math.round(info.main.temp)}`}</div>
